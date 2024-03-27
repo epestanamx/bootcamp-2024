@@ -12,13 +12,17 @@ const login = async (req, res) => {
   });
 
   if (!usuario) {
-    return res.status(401).send({ msg: 'Usuario y/o contraseña incorrecto.'});
+    return res.status(401).send({ msg: 'Correo y/o contraseña incorrecta.'});
   }
 
-  const token = jwt.sign(usuario.dataValues, "SECRET");
+  const token = jwt.sign(usuario.dataValues, "SECRET", {
+    expiresIn: 60 * 60 * 24 * 7, // 7 días
+  });
+
+  const { contrasenia: _, ...usuarioData } = usuario.dataValues;
 
   return res.send({
-    ...usuario.dataValues,
+    ...usuarioData,
     token,
   });
 };

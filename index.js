@@ -2,8 +2,8 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
 const { CuentaDetalle } = require('./models')();
-const usuariosController = require('./controllers/usuarios');
 const auth = require('./middlewares/auth');
+const router = require('./routes');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,11 +17,8 @@ app.get('/', (req, res) => {
     version: '1.0.0',
   });
 });
-app.post('/login', usuariosController.login);
-app.get('/usuarios', usuariosController.getUsuarios);
-app.post('/usuarios', usuariosController.createUsuario);
-app.put('/usuarios/:idUsuario', usuariosController.updateUsuario);
-app.delete('/usuarios/:idUsuario', usuariosController.deleteUsuario);
+
+app.use('/', router);
 
 app.get('/cuentas-detalle', async (req, res) => {
   const include = [];
