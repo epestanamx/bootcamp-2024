@@ -1,7 +1,7 @@
 const { Proveedor } = require('../models')();
 
 const createProveedor = async (req, res) => {
-  const requiredParams = ["nombre", "apellidos"];
+  const requiredParams = ["nombre"];
 
   const lostParams = requiredParams
     .filter((param) => {
@@ -15,50 +15,50 @@ const createProveedor = async (req, res) => {
     return res.status(400).send(lostParams);
   }
 
-  const cliente = await Proveedor.create(req.body);
-  return res.send(cliente);
+  const proveedor = await Proveedor.create(req.body);
+  return res.send(proveedor);
 };
 
 const getProveedors = async (req, res) => {
-  const clientes = await Proveedor.findAll();
+  const proveedores = await Proveedor.findAll();
 
-  return res.send(clientes);
+  return res.send(proveedores);
 };
 
 const getProveedorById = async (idProveedor) => {
-  const cliente = await Proveedor.findOne({
+  const proveedor = await Proveedor.findOne({
     where: {
       idProveedor,
     },
   });
 
-  return cliente;
+  return proveedor;
 };
 
 const updateProveedor = async (req, res) => {
   const { idProveedor } = req.params;
 
-  const cliente = await getProveedorById(idProveedor);
+  const proveedor = await getProveedorById(idProveedor);
 
-  if(!cliente) {
-    return res.status(404).send({ msg: 'El cliente no existe' });
+  if(!proveedor) {
+    return res.status(404).send({ msg: 'El proveedor no existe' });
   }
 
-  await cliente.update(req.body);
+  await proveedor.update(req.body);
 
-  return res.send(cliente);
+  return res.send(proveedor);
 };
 
 const deleteProveedor = async (req, res) => {
   const { idProveedor } = req.params;
 
-  const cliente = await getProveedorById(idProveedor);
+  const proveedor = await getProveedorById(idProveedor);
 
-  if (!cliente) {
-    return res.status(404).send({ msg: "El cliente no existe" });
+  if (!proveedor) {
+    return res.status(404).send({ msg: "El proveedor no existe" });
   }
 
-  await cliente.destroy();
+  await proveedor.destroy();
   return res.send({
     msg: 'Proveedor eliminado.'
   });
