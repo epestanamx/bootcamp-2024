@@ -23,7 +23,7 @@ const CuentaDef = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "CATEGORIAS",
+      tableName: "CUENTAS",
       timestamps: false,
     }
   );

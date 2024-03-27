@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { CuentaDetalle } = require('./models')();
 const auth = require('./middlewares/auth');
@@ -8,8 +9,11 @@ const router = require('./routes');
 const app = express();
 const server = http.createServer(app);
 
-app.use(bodyParser.json());
 app.use(auth);
+app.use(cors({
+  origin: '*',
+}));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   return res.send({
