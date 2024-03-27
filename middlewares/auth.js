@@ -1,9 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const auth = (req, res, next) => {
-  console.log(req.url);
-
-  if (req.url === '/login') {
+  if (['/', '/login']) {
     return next();
   }
 
