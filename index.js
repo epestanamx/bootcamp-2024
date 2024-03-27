@@ -11,6 +11,12 @@ const server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(auth);
 
+app.get('/', (req, res) => {
+  return res.send({
+    app: 'ContAPI',
+    version: '1.0.0',
+  });
+});
 app.post('/login', usuariosController.login);
 app.get('/usuarios', usuariosController.getUsuarios);
 app.post('/usuarios', usuariosController.createUsuario);
