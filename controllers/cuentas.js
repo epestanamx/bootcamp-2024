@@ -68,6 +68,7 @@ const getMovimientos = async (req, res) => {
   const { idCuenta } = req.params;
 
   const movimientos = await CuentaDetalle.findAll({
+    include: ['cliente', 'proveedor'],
     where: {
       idCuenta,
     }

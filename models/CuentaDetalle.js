@@ -28,6 +28,10 @@ const CuentaDetalleDef = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         field: "IDUSUARIO",
       },
+      descripcion: {
+        type: DataTypes.STRING,
+        field: "DESCRIPCION",
+      },
       cargo: {
         type: DataTypes.FLOAT,
         field: 'CARGO'
@@ -60,7 +64,7 @@ const CuentaDetalleDef = (sequelize, DataTypes) => {
 
     CuentaDetalle.belongsTo(models.Proveedor, {
       foreignKey: 'idProveedor',
-      as: 'proveedores'
+      as: 'proveedor'
     });
   };
 
