@@ -52,6 +52,16 @@ const CuentaDetalleDef = (sequelize, DataTypes) => {
       foreignKey: 'idCliente',
       as: 'cliente'
     });
+
+    CuentaDetalle.belongsTo(models.Cuenta, {
+      foreignKey: 'idCuenta',
+      as: 'cuenta'
+    });
+
+    CuentaDetalle.belongsTo(models.Proveedor, {
+      foreignKey: 'idProveedor',
+      as: 'proveedores'
+    });
   };
 
   return CuentaDetalle;

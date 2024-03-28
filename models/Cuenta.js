@@ -28,6 +28,13 @@ const CuentaDef = (sequelize, DataTypes) => {
     }
   );
 
+  Cuenta.associate = (models) => {
+    Cuenta.hasMany(models.CuentaDetalle, {
+      foreignKey: "idCuenta",
+      as: "detalles",
+    });
+  };
+
   return Cuenta;
 };
 

@@ -1,4 +1,4 @@
-const { Cuenta } = require('../models')();
+const { Cuenta, CuentaDetalle } = require('../models')();
 
 const createCuenta = async (req, res) => {
   const requiredParams = ['cuenta'];
@@ -64,9 +64,22 @@ const deleteCuenta = async (req, res) => {
   });
 };
 
+const getMovimientos = async (req, res) => {
+  const { idCuenta } = req.params;
+
+  const movimientos = await CuentaDetalle.findAll({
+    where: {
+      idCuenta,
+    }
+  });
+
+  return res.status(200).send(movimientos);
+};
+
 module.exports = {
   createCuenta,
   getCuentas,
   updateCuenta,
   deleteCuenta,
+  getMovimientos,
 };

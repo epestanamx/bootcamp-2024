@@ -12,4 +12,6 @@ router
   .put(cuentasController.updateCuenta)
   .delete(cuentasController.deleteCuenta);
 
+router.route("/:idCuenta/movimientos").get(cuentasController.getMovimientos);
+
 module.exports = router;
